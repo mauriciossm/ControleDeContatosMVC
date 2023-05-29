@@ -1,0 +1,47 @@
+﻿@using SistamaDeContatos.Enums;
+@model UsuarioModel
+@{
+    ViewData["Title"] = "Editar usário";
+}
+
+
+<div class="text-center">
+    <h1 class="display=4">@ViewData["Title"]</h1>
+</div>
+
+<form asp-controller="Usuarios" asp-action="Alterar" method="post">
+    
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Nome do contato">
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" asp-for="Email" class="form-control" placeholder="nome@example.com">
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    <div class="mb-3">
+        <label for="login" class="form-label">Login</label>
+        <input type="text" asp-for="Login" class="form-control" placeholder="Login do usuário">
+        @Html.ValidationMessageFor(x => x.Login)
+    </div>
+    <div class="mb-3">
+        <label for="perfil" class="form-label">Perfil</label>
+        <select class="form-select" aria-label="Default select example" asp-for="Perfil">
+            <option selected>Selecione o tipo do perfil</option>
+            <option value="@PerfilEnum.Admin">Administrador</option>
+            <option value="@PerfilEnum.Padrao">Padrão</option>
+        </select>
+        @Html.ValidationMessageFor(x => x.Perfil)
+    </div>
+
+    <br />
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Salvar alterações</button>
+        <a class="btn btn-secondary" asp-controller="Usuarios" asp-action="Index">Voltar</a>
+    </div>
+</form>

@@ -3,14 +3,22 @@
     ViewData["Title"] = "Apagar contato";
 }
 <div class="text-center">
-    <h3 class="display-3">Realmente deseja apagar o (@Model.Nome)?</h3>
+    <h3>Realmente deseja apagar este contato?</h3>
 </div>
+<div>
+    <hr />
 
-<br />
+    <h4>Contato</h4>
 
+    <p>Nome: @Model.Nome</p>
+    <p>E-mail: @Model.Email</p>
+    <p>Celular: @Model.Celular</p>
+
+    <br />
+</div>
 
 <div class="d-grid gap-2">
     <a class="btn btn-secondary" asp-route-id="@Model.Id" asp-controller="Contatos" asp-action="Apagar">Confirmar deleção</a>
-    
+
     <a class="btn btn-danger" asp-controller="Contatos" asp-action="Index">Cancelar deleção</a>
 </div>

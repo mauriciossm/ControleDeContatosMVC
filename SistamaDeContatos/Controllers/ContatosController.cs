@@ -7,12 +7,13 @@ namespace SistamaDeContatos.Controllers
     public class ContatosController : Controller
     {
         private readonly IContatoRepositorio _contatoRepositorio;
+        
 
-        public ContatosController(IContatoRepositorio contatoRepositorio) 
-        { 
+        public ContatosController(IContatoRepositorio contatoRepositorio)
+        {
             _contatoRepositorio = contatoRepositorio;
         }
-        
+
         public IActionResult Index()
         {
             List<ContatoModel> contatos = _contatoRepositorio.BuscarTodos();
@@ -25,15 +26,15 @@ namespace SistamaDeContatos.Controllers
         public IActionResult Editar(int id)
         {
             ContatoModel contato = _contatoRepositorio.ListarPorId(id);
-                if (_contatoRepositorio.Verificao(contato)) 
-                {
-                    return View(contato);
-                }
-                else
-                {
-                    return RedirectToAction(nameof(PaginaErro));
-                }
-            
+            if (_contatoRepositorio.Verificao(contato))
+            {
+                return View(contato);
+            }
+            else
+            {
+                return RedirectToAction("PaginaErro", "Home");
+            }
+
         }
         public IActionResult ConfirmacaoApagar(int id)
         {
@@ -44,7 +45,7 @@ namespace SistamaDeContatos.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(PaginaErro));
+                return RedirectToAction("PaginaErro", "Home");
             }
         }
         public IActionResult Apagar(int id)
@@ -63,14 +64,14 @@ namespace SistamaDeContatos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception erro) 
+            catch (Exception erro)
             {
                 TempData["MensagemErro"] = $"Não foi possível apagar o contato. Detalhes do erro: {erro.Message}";
-                return RedirectToAction(nameof(PaginaErro));
+                return RedirectToAction("PaginaErro", "Home");
 
             }
         }
-        
+
         [HttpPost]
         public IActionResult Criar(ContatoModel contato)
         {
@@ -88,7 +89,7 @@ namespace SistamaDeContatos.Controllers
                     return View(contato);
                 }
             }
-            catch (Exception erro) 
+            catch (Exception erro)
             {
                 TempData["MensagemErro"] = $"Não foi possível cadastrar o contato. Detalhes do erro: {erro.Message}";
                 return RedirectToAction(nameof(Index));
@@ -119,11 +120,5 @@ namespace SistamaDeContatos.Controllers
             }
 
         }
-        
-        public IActionResult PaginaErro()
-        {
-            return View();
-        }
-
     }
 }

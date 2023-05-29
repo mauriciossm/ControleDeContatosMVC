@@ -3,6 +3,8 @@
 
 // Write your JavaScript code.
 
+
+
 $(document).ready(function () {
     $('#MyTable').DataTable({
         "ordering": true,

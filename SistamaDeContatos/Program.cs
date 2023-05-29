@@ -14,6 +14,7 @@ namespace SistamaDeContatos
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<BancoContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
             builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
+            builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
             var app = builder.Build();
             
@@ -30,7 +31,7 @@ namespace SistamaDeContatos
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
 
             app.Run();
         }
