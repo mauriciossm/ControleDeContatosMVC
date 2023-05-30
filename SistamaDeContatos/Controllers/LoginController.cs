@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistamaDeContatos.Helper;
 using SistamaDeContatos.Models;
 using SistamaDeContatos.Repositorio;
 
@@ -7,15 +8,29 @@ namespace SistamaDeContatos.Controllers
     public class LoginController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly ISessao _sessao;
 
-        public LoginController(IUsuarioRepositorio usuarioRepositorio)
+        public LoginController(IUsuarioRepositorio usuarioRepositorio, ISessao sessao)
         {
             _usuarioRepositorio = usuarioRepositorio;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            // Se o usuário estiver logado, redirecionar para home
+            if (_sessao.BuscarSessaoUsuario() != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+                return View();
+        }
+
+        public IActionResult Sair()
+        {
+            _sessao.RemoverSessaoUsuario();
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpPost]
@@ -33,15 +48,17 @@ namespace SistamaDeContatos.Controllers
                     {
                         if (usuario.VerificarSenha(loginModel.Senha))
                         {
+                            _sessao.CriarSessaoUsuario(usuario);
                             return RedirectToAction("Index", "Home");
 
                         }
                         TempData["MensagemErro"] = "Senha inválida, tente novamente.";
-                        return RedirectToAction("Index");
-
+                    }
+                    else
+                    {
+                        TempData["MensagemErro"] = "Login ou/e senha inválido(s), tente novamente.";
 
                     }
-                    TempData["MensagemErro"] = "Login ou/e senha inválido(s), tente novamente.";
 
                 }
                 return View(nameof(Index));

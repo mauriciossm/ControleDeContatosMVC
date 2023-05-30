@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistamaDeContatos.Filters;
 using SistamaDeContatos.Models;
 using SistamaDeContatos.Repositorio;
 
 namespace SistamaDeContatos.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class ContatosController : Controller
     {
+        
         private readonly IContatoRepositorio _contatoRepositorio;
         
 
