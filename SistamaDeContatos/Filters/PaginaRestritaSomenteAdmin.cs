@@ -28,8 +28,7 @@ namespace SistamaDeContatos.Filters
                 {
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Restrito" }, { "action", "Index" } });
                 }
-                context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } });
-
+                
             }
 
             base.OnActionExecuted(context);

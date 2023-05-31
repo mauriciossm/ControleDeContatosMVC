@@ -1,4 +1,5 @@
 ﻿using SistamaDeContatos.Enums;
+using SistamaDeContatos.Helper;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -28,7 +29,20 @@ namespace SistamaDeContatos.Models
 
         public bool VerificarSenha(string senha)
         {
-            return Senha == senha;
+
+            return Senha == senha.GerarHash();
+        }
+
+        public void SetSenhaHash()
+        {
+            Senha = Senha.GerarHash();
+        }
+
+        public string GerarNovaSenha()
+        {
+            string novaSenha = Guid.NewGuid().ToString().Substring(0, 8);
+            Senha = novaSenha.GerarHash();
+            return novaSenha;
         }
     }
 }

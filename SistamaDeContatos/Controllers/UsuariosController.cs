@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistamaDeContatos.Filters;
+using SistamaDeContatos.Helper;
 using SistamaDeContatos.Models;
 using SistamaDeContatos.Repositorio;
 
@@ -9,10 +10,12 @@ namespace SistamaDeContatos.Controllers
     public class UsuariosController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly ISessao _sessao;
 
-        public UsuariosController(IUsuarioRepositorio usuarioRepositorio)
+        public UsuariosController(IUsuarioRepositorio usuarioRepositorio, ISessao sessao)
         {
             _usuarioRepositorio = usuarioRepositorio;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
@@ -53,6 +56,11 @@ namespace SistamaDeContatos.Controllers
         {
             try
             {
+                if (_sessao.BuscarSessaoUsuario() == null)
+                {
+                    return RedirectToAction("Index", "Login");
+                }
+
                 bool apagado = _usuarioRepositorio.Apagar(id);
 
                 if (apagado)

@@ -13,16 +13,21 @@ namespace SistamaDeContatos.Repositorio
         public UsuarioModel Adicionar(UsuarioModel usuario)
         {
             usuario.DataCadastro = DateTime.Now;
+            usuario.SetSenhaHash();
             _bancoContext.Usuarios.Add(usuario);
             _bancoContext.SaveChanges();
             return usuario;
         }
 
+        public UsuarioModel BuscarPorEmailELogin(string email, string login)
+        {
+            return _bancoContext.Usuarios.FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper() && x.Login.ToUpper() == login.ToUpper());
+        }
+
         public UsuarioModel BuscarPorLogin(string login)
         {
-#pragma warning disable CS8603 // Possible null reference return.
-            return _bancoContext.Usuarios.FirstOrDefault(x => x.Login == login);
-#pragma warning restore CS8603 // Possible null reference return.
+
+            return _bancoContext.Usuarios.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
         }
         public bool Verificao(UsuarioModel usuario)
         {
@@ -83,5 +88,7 @@ namespace SistamaDeContatos.Repositorio
             return _bancoContext.Usuarios.FirstOrDefault(x => x.Id == id);
 #pragma warning restore CS8603 // Possible null reference return.
         }
+
+        
     }
 }
