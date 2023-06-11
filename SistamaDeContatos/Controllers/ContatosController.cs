@@ -41,18 +41,7 @@ namespace SistamaDeContatos.Controllers
             }
 
         }
-        public IActionResult ConfirmacaoApagar(int id)
-        {
-            ContatoModel contato = _contatoRepositorio.ListarPorId(id);
-            if (_contatoRepositorio.Verificao(contato))
-            {
-                return View(contato);
-            }
-            else
-            {
-                return RedirectToAction("PaginaErro", "Home");
-            }
-        }
+        
         public IActionResult Apagar(int id)
         {
             try

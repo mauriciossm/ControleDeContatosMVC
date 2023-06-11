@@ -4,6 +4,16 @@
 // Write your JavaScript code.
 
 
+$(document).ready(function () {
+    setTimeout(function () {
+        $(".alert").fadeOut("slow", function () {
+            $(this).alert('close');
+        });
+    }, 5000);
+});
+
+
+
 
 $(document).ready(function () {
     $('#MyTable').DataTable({
@@ -37,12 +47,4 @@ $(document).ready(function () {
 });
 
 
-
-$(document).ready(function () {
-    setTimeout(function () {
-        $(".alert").fadeOut("slow", function () {
-            $(this).alert('close');
-        });
-    }, 5000);
-});
 

@@ -23,5 +23,10 @@ namespace SistamaDeContatos.Controllers
         {
             return View();
         }
+
+        public IActionResult Create()
+        {
+            return PartialView("_PartialView");
+        }
     }
 }

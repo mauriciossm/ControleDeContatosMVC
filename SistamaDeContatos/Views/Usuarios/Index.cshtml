@@ -80,10 +80,27 @@
 
                         <td>
                             <a class="btn btn-primary" asp-route-id="@usuario.Id" asp-controller="Usuarios" asp-action="Editar">Editar</a>
-                            <a class="btn btn-danger" asp-route-id="@usuario.Id" asp-controller="Usuarios" asp-action="ConfirmacaoApagar">Apagar</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal-@usuario.Id" asp-route-id="@usuario.Id">Apagar</button>
                         </td>
 
                     </tr>
+
+                    <div class="modal fade" id="DeleteModal-@usuario.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="DeleteModalLabel">Excluir Usuário</h5>
+                                </div>
+                                <div class="modal-body">
+                                   Deseja excluir @usuario.Nome?
+                                </div>   
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Voltar</button>
+                                    <a class="btn btn-danger" asp-route-id="@usuario.Id" asp-controller="Usuarios" asp-action="Apagar">Confirmar deleção</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
             }
         </tbody>
