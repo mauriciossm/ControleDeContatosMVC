@@ -65,7 +65,7 @@ namespace SistamaDeContatos.Controllers
 
                 if (apagado)
                 {
-                    TempData["MensagemSucesso"] = "usuário apagado com sucesso";
+                    TempData["MensagemSucesso"] = "Usuário apagado com sucesso";
                 }
                 else
                 {
