@@ -7,6 +7,7 @@ namespace SistamaDeContatos.Repositorio
         UsuarioModel ListarPorId(int id);
         UsuarioModel BuscarPorLogin(string login);
         UsuarioModel BuscarPorEmailELogin(string email,string login);
+        UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenha);
 
         List<UsuarioModel> BuscarTodos();
         UsuarioModel Adicionar(UsuarioModel usuario);

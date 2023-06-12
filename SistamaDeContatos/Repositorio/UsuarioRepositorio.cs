@@ -89,6 +89,31 @@ namespace SistamaDeContatos.Repositorio
 #pragma warning restore CS8603 // Possible null reference return.
         }
 
-        
+        public UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenha)
+        {
+            UsuarioModel usuarioDB = ListarPorId(alterarSenha.Id);
+            if (usuarioDB == null)
+            {
+                throw new Exception("Houve um erro na atualização da senha. Usuário não encontrado");
+            }
+
+            if (!usuarioDB.VerificarSenha(alterarSenha.SenhaAtual))
+            {
+                throw new Exception("Senha atual não confera!");
+            }
+
+            if (usuarioDB.VerificarSenha(alterarSenha.NovaSenha))
+            {
+                throw new Exception("Nova senha deve ser diferente da senha atual!");
+            }
+
+            usuarioDB.SetNovaSenha(alterarSenha.NovaSenha);
+            usuarioDB.DataAtualizacao = DateTime.Now;
+
+            _bancoContext.Usuarios.Update(usuarioDB);
+            _bancoContext.SaveChanges();
+
+            return usuarioDB;
+        }
     }
 }
