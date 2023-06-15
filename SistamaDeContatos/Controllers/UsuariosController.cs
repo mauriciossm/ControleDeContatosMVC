@@ -27,6 +27,8 @@ namespace SistamaDeContatos.Controllers
         {
             return View();
         }
+
+        
         public IActionResult Editar(int id)
         {
             UsuarioModel usuario = _usuarioRepositorio.ListarPorId(id);

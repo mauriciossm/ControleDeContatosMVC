@@ -4,6 +4,13 @@
     ViewData["Title"] = "Login";
 }
 
+<div class="text-end">
+    Não tem conta?
+    <a class="btn btn-outline-success btn-sm" asp-controller="UsuarioPrimeiroRegistro" asp-action="Index">
+        CADASTRE-SE
+    </a>
+</div>
+
 @if (TempData["MensagemSucesso"] != null)
 {
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
