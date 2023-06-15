@@ -21,7 +21,8 @@ namespace SistamaDeContatos.Controllers
 
         public IActionResult Index()
         {
-            List<ContatoModel> contatos = _contatoRepositorio.BuscarTodos();
+            UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario(); 
+            List<ContatoModel> contatos = _contatoRepositorio.BuscarTodos(usuarioLogado.Id);
             return View(contatos);
         }
         public IActionResult Criar()
@@ -79,6 +80,9 @@ namespace SistamaDeContatos.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
+                    contato.UsuarioId = usuarioLogado.Id;   
+
                     TempData["MensagemSucesso"] = "Contato cadastrado com sucesso";
                     _contatoRepositorio.Adicionar(contato);
                     return RedirectToAction(nameof(Index));
@@ -103,6 +107,10 @@ namespace SistamaDeContatos.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    UsuarioModel usuarioLogado = _sessao.BuscarSessaoUsuario();
+                    contato.UsuarioId = usuarioLogado.Id;
+
+
                     TempData["MensagemSucesso"] = "Contato alterado com sucesso";
                     _contatoRepositorio.Atualizar(contato);
                     return RedirectToAction(nameof(Index));

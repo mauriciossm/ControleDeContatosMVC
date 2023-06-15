@@ -27,6 +27,8 @@ namespace SistamaDeContatos.Models
         public DateTime DataCadastro { get; set; }
         public DateTime? DataAtualizacao { get; set; }
 
+        public List<ContatoModel>? Contatos { get; set; }
+
         public bool VerificarSenha(string senha)
         {
 

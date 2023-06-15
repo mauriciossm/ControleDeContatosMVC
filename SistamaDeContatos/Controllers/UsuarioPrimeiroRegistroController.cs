@@ -28,24 +28,13 @@ namespace SistamaDeContatos.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    TempData["MensagemSucesso"] = "Usuário cadastrado com sucesso";
+                    
                     _usuarioRepositorio.Adicionar(usuario);
                     usuario = _usuarioRepositorio.BuscarPorLogin(loginModel.Login);
 
-                    if (_usuarioRepositorio.Verificao(usuario))
-                    {
-                        if (usuario.VerificarSenha(loginModel.Senha))
-                        {
                             _sessao.CriarSessaoUsuario(usuario);
                             return RedirectToAction("Index", "Home");
-
-                        }
-                        TempData["MensagemErro"] = "Senha inválida, tente novamente.";
-                    }
-                    
-                        TempData["MensagemErro"] = "Login ou/e senha inválido(s), tente novamente.";
-                        return RedirectToAction("LoginController", "Index");                  
-                }
+}
                 else
                 {
                     return View(usuario);
