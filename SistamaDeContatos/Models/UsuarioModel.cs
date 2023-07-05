@@ -1,4 +1,5 @@
-﻿using SistamaDeContatos.Enums;
+﻿using Microsoft.EntityFrameworkCore;
+using SistamaDeContatos.Enums;
 using SistamaDeContatos.Helper;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,9 @@ namespace SistamaDeContatos.Models
         [EmailAddress(ErrorMessage = "O e-mail informado não é valido")]
         public string Email { get; set; }
         
+        
         [Required(ErrorMessage = "Digite o Login do usuário")]
+        
         public string Login { get; set; }
         
         [Required(ErrorMessage = "Selecione o tipo de perfil")]

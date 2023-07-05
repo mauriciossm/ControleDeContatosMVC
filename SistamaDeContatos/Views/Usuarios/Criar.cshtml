@@ -20,10 +20,11 @@
         <input type="email" asp-for="Email" class="form-control" placeholder="nome@example.com">
         @Html.ValidationMessageFor(x => x.Email)
     </div>
-    <div class="mb-3">
-        <label for="login" class="form-label">Login</label>
-        <input type="text" asp-for="Login" class="form-control" placeholder="Login do usuário">
+    <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Login</label>
+        <input type="text" asp-for="Login" class="form-control" id="validationCustom01" placeholder="Login do usuário">
         @Html.ValidationMessageFor(x => x.Login)
+       
     </div>
     <div class="mb-3">
         <label for="senha" class="form-label">Senha</label>

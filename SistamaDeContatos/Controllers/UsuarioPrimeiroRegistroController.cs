@@ -37,7 +37,7 @@ namespace SistamaDeContatos.Controllers
 }
                 else
                 {
-                    return View(usuario);
+                    return View("Index", usuario);
                 }
             }
             catch (Exception erro)

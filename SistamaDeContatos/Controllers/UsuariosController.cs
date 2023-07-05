@@ -89,6 +89,17 @@ namespace SistamaDeContatos.Controllers
             try
             {
 
+                List<UsuarioModel> usuarios = _usuarioRepositorio.BuscarTodos();
+                foreach (var login in usuarios)
+                {
+                    if(login.Login == usuario.Login)
+                    {
+                        TempData["MensagemErro"] = $"Não foi possível cadastrar o usuário. Detalhes do erro: usuario já cadastrado com esse login";
+                        return View(usuario);
+                    }
+                }
+
+
                 if (ModelState.IsValid)
                 {
                     TempData["MensagemSucesso"] = "Usuário cadastrado com sucesso";
